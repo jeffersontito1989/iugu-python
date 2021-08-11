@@ -47,7 +47,9 @@ class IuguApi(object):
         url = 'https://api.iugu.com/v1/'
         for path in paths:
             url = re.sub(r'/?$', re.sub(r'^/?', '/', str(path)), url)
-        return url
+        if len(paths) == 1 and 'invoices' in paths:
+            url = 'https://api.iugu.com/v1/invoices'
+        return url.replace('/invoices/invoices/','/invoices/')
 
 __default_api__ = None
 
